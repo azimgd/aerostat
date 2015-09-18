@@ -1,0 +1,29 @@
+{
+  "name": "aerostat",
+  "version": "0.0.1",
+  "description": "Package for creating, scheduling and segmenting push notifications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azimgd/aerostat.git"
+  },
+  "keywords": [
+    "delayed",
+    "queue",
+    "pubsub",
+    "push",
+    "notifications"
+  ],
+  "author": "Azim Gadzhiagayev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/azimgd/aerostat/issues"
+  },
+  "homepage": "https://github.com/azimgd/aerostat#readme",
+  "dependencies": {
+    "kue": "^0.9.5"
+  }
+}
