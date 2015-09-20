@@ -25,7 +25,9 @@
   "homepage": "https://github.com/azimgd/aerostat#readme",
   "dependencies": {
     "axios": "^0.5.4",
+    "flat": "^1.6.0",
     "kue": "^0.9.5",
+    "lodash": "^3.10.1",
     "q": "^1.4.1"
   }
 }

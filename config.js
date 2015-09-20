@@ -1,6 +1,6 @@
 let config = {
   api: {
-    url: 'http://azimgd.com'
+    url: 'http://www.mocky.io/v2'
   }
 };
 
