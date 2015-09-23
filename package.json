@@ -1,6 +1,6 @@
 {
   "name": "aerostat",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Package for creating, scheduling and segmenting push notifications",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,13 @@
   },
   "keywords": [
     "delayed",
+    "message",
     "queue",
     "pubsub",
     "push",
-    "notifications"
+    "notifications",
+    "hook",
+    "pusher"
   ],
   "author": "Azim Gadzhiagayev",
   "license": "ISC",
