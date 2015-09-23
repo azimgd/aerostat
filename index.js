@@ -1,4 +1,6 @@
-let manager = require('./lib/manager')();
+let manager = require('./lib/manager')({
+  infinite: true
+});
 
 manager.init('jobname', {
   url: '/55febabac604810e14c098fa',
