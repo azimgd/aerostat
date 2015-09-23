@@ -1,5 +1,6 @@
 let manager = require('./lib/manager')({
-  infinite: true
+  infinite: true,
+  delay: 5000
 });
 
 manager.init('jobname', {

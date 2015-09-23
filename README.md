@@ -12,7 +12,12 @@ let options = {
    * New job will be added to queue after existing is executed,
    * creating infinite loop of delayed jobs
    */
-  infinite: true
+  infinite: false,
+
+  /**
+   * Delay between repeating jobs in milliseconds 
+   */
+  delay: 5000
 };
 ```
 
