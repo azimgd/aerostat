@@ -4,7 +4,7 @@ Pubsub MQ integrated with message delivery, for creating scheduled push notifica
 
 ![Aerostat architecture](http://i.imgur.com/1RRgHzV.png)
 
-## Exampes
+## Example
 This code exampe will publish a subscription, and consumer will deliver payload message each 2 minutes to provided url. 
 ```
 let aerostat = require('./lib/manager')();
