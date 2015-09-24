@@ -32,7 +32,7 @@ let options = {
 This code exampe will publish a subscription, and consumer will deliver payload message each 2 minutes to provided url.
 ```
 let options = {};
-let aerostat = require('./lib/manager')(options);
+let aerostat = require('aerostat')(options);
 
 aerostat.init('jobname', {
   url: '/v2/analytics/update',
@@ -53,7 +53,7 @@ aerostat.init('jobname', {
 
 The MIT License (MIT)
 
-Copyright (c) <2015> &lt;me@azimgd.com&gt;
+Copyright (c) 2015 Aerostat &lt;me@azimgd.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
