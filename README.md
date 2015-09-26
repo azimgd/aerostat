@@ -16,9 +16,9 @@ Be sure to run this script with support of ES6 on your node.js environment!
 let options = {
   /**
    * New job will be added to queue after existing is executed,
-   * creating infinite loop of delayed jobs
+   * creating infinite loop of delayed repeating jobs
    */
-  infinite: false,
+  repeating: false,
 
   /**
    * Delay between repeating jobs in milliseconds

@@ -1,5 +1,5 @@
 let manager = require('../index')({
-  infinite: true,
+  repeating: true,
   delay: 5000
 });
 
