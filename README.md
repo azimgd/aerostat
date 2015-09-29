@@ -31,10 +31,10 @@ let options = {
 
 This code exampe will publish a subscription, and consumer will deliver payload message each 2 minutes to provided url.
 ```
+let aerostat = require('aerostat');
 let options = {};
-let aerostat = require('aerostat')(options);
 
-aerostat.init('jobname', {
+aerostat(options).init('jobname', {
   url: '/v2/analytics/update',
   method: 'post',
   payload: {
@@ -42,10 +42,10 @@ aerostat.init('jobname', {
     timestamp: '1182882221',
     msg: 'message'
   }
-}, (response) => {
-  console.log(response);
-}, (err) => {
-  console.log('failed request');
+}, (res) => {
+  console.log(res.response, res.payload);
+}, (res) => {
+  console.log(res.err, res.payload);
 });
 ```
 

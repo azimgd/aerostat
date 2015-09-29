@@ -11,10 +11,10 @@ manager.init('will-pass', {
     surname: 'surname',
     msg: 'message'
   }
-}, (data) => {
-  console.log(data);
-}, (err) => {
-  console.log('failed request');
+}, (res) => {
+  console.log(res.response, res.payload);
+}, (res) => {
+  console.log(res.err, res.payload);
 });
 
 manager.init('will-fail', {
@@ -25,8 +25,8 @@ manager.init('will-fail', {
     surname: 'surname',
     msg: 'message'
   }
-}, (data) => {
-  console.log(data);
-}, (err) => {
-  console.log(err);
+}, (res) => {
+  console.log(res.response, res.payload);
+}, (res) => {
+  console.log(res.err, res.payload);
 });
