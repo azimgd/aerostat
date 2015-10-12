@@ -15,6 +15,11 @@ Be sure to run this script with support of ES6 on your node.js environment!
 ```
 let options = {
   /**
+   * Api url
+   */
+  root_url: 'http://example.com',
+
+  /**
    * New job will be added to queue after existing is executed,
    * creating infinite loop of delayed repeating jobs
    */
