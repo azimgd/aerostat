@@ -1,5 +1,4 @@
 let axios = require('axios');
-let config = require('../config');
 let flatten = require('flat');
 let unflatten = flatten.unflatten;
 
