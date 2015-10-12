@@ -1,5 +1,4 @@
 var axios = require('axios');
-var config = require('../config');
 
 class Request {
   constructor(options) {

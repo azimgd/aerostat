@@ -3,8 +3,8 @@ var kue = require('kue'),
 
 kue.app.listen(3000);
 
-let init = {
+var init = {
     kue: kue,
     queue: queue
 };
-export default init;
+module.exports = init;
