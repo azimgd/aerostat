@@ -1,6 +1,6 @@
 {
   "name": "aerostat",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Package for creating, scheduling and segmenting push notifications",
   "main": "index.js",
   "scripts": {

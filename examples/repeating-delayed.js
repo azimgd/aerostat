@@ -1,4 +1,5 @@
 let manager = require('../index')({
+  root_url: 'http://www.mocky.io/v2',
   repeating: true,
   delay: 5000
 });
