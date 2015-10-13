@@ -10,7 +10,7 @@ class Producer {
     let job = init.queue.create(name, data);
 
     if(this.delay) {
-      job.delay(this.delay);
+      job.delay(this.delay).ttl(this.delay + 5000);
     }
 
     if(this.priority) {

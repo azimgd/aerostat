@@ -6,19 +6,12 @@ Aerostat is a Pub/Sub MQ integrated with message delivery service built for node
 
 ## Installation
 
-Be sure to run this script with support of ES6 on your node.js environment!
-
 `npm install aerostat`
 
 ## Options
 
 ```
 let options = {
-  /**
-   * Api url
-   */
-  root_url: 'http://example.com',
-
   /**
    * New job will be added to queue after existing is executed,
    * creating infinite loop of delayed repeating jobs
@@ -40,7 +33,7 @@ let aerostat = require('aerostat');
 let options = {};
 
 aerostat(options).init('jobname', {
-  url: '/v2/analytics/update',
+  url: 'http://example.com/v2/analytics/update',
   method: 'post',
   payload: {
     user: 'username',
