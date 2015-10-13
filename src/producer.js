@@ -7,7 +7,7 @@ class Producer {
   }
 
   create(name, data) {
-    let job = init.queue.create(name, data);
+    let job = init.queue.create(name, data).removeOnComplete(true);
 
     if(this.delay) {
       job.delay(this.delay).ttl(this.delay + 5000);
