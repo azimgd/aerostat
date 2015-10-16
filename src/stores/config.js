@@ -3,6 +3,7 @@ class Config {
     this._isRepeating = false;
     this._rootUrl = 'http://example.com';
     this._delay = '1000';
+    this._priority = 'normal';
   }
 
   /**

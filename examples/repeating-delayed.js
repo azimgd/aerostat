@@ -1,7 +1,7 @@
 import Aerostat from '../index';
 let aerostat = Aerostat();
 
-aerostat.setConfig({ isRepeating: true, delay: 3400 });
+aerostat.setConfig({ isRepeating: true, delay: 3400, priority: 'high' });
 
 aerostat.init('will-pass', {
   url: '/55febabac604810e14c098fa',

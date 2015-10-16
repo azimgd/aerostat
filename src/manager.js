@@ -29,6 +29,10 @@ class Manager {
     if(data.delay !== undefined) {
       this.config.delay = data.delay;
     }
+
+    if(data.priority !== undefined) {
+      this.config.priority = data.priority;
+    }
   }
 
   /**
