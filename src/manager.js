@@ -1,33 +1,64 @@
-let consumer = require('./consumer');
-let producer = require('./producer');
-let init = require('../init');
-let Q = require('q');
-let _ = require('lodash');
-let Utils = require('./utils')();
+import Consumer from './consumer';
+import Producer from './producer';
+import init from '../init';
+import Q from 'q';
+import _ from 'lodash';
+import Config from './stores/config';
+import Utils from './utils';
 
 class Manager {
-  constructor(consumer, producer, options = {}) {
-    let isRepeatingQueue = options.repeating || false;
-    let rootUrl = options.root_url || false;
-    let delay = options.delay || 5000;
-
-    this.consumer = consumer({
-      repeating: isRepeatingQueue,
-      root_url: rootUrl
-    });
-    this.producer = producer({
-      delay: delay
-    });
+  constructor() {
+    this.config = new Config();
+    this.consumer = new Consumer(this.config);
+    this.producer = new Producer(this.config);
+    this.utils = Utils();
   }
 
+  /**
+   *
+   */
+  setConfig(data) {
+    if(data.isRepeating !== undefined) {
+      this.config.isRepeating = data.isRepeating;
+    }
+
+    if(data.rootUrl !== undefined) {
+      this.config.rootUrl = data.rootUrl;
+    }
+
+    if(data.delay !== undefined) {
+      this.config.delay = data.delay;
+    }
+  }
+
+  /**
+   *
+   */
+  getConfig() {
+    return {
+      isRepeating: this.config.isRepeating,
+      rootUrl: this.config.rootUrl,
+      delay: this.config.delay
+    }
+  }
+
+  /**
+   *
+   */
   rangeByType(type, state = 'delayed') {
     return Q.ninvoke(init.kue.Job, 'rangeByType', type, state, 0, 1, 'asc');
   }
 
+  /**
+   *
+   */
   rangeByState(state = 'delayed') {
     return Q.ninvoke(init.kue.Job, 'rangeByType', state, 0, 1, 'asc');
   }
 
+  /**
+   *
+   */
   clearQueue(name, state = 'delayed') {
     this.rangeByType(name, state)
       .then((jobs) => {
@@ -40,6 +71,9 @@ class Manager {
       });
   }
 
+  /**
+   *
+   */
   delayedJobExists(name) {
     return this.rangeByType(name)
       .then((jobs) => {
@@ -50,6 +84,9 @@ class Manager {
       });
   }
 
+  /**
+   *
+   */
   listByType(type, state = 'delayed') {
     return this.rangeByType(type, state);
   }
@@ -58,12 +95,11 @@ class Manager {
     return this.rangeByState(type);
   }
 
+  /**
+   *
+   */
   init(name, data, success, failure) {
-    /**
-     * transforming data into required format
-     * because kue is not able to save nested json
-     */
-    data = Utils.encode(data);
+    data = this.utils.encode(data);
     let jobFunction = () => this.producer.create(name, data);
 
     this.delayedJobExists(name).then((exists) => {
@@ -80,5 +116,5 @@ class Manager {
   }
 }
 
-let manager = (options) => new Manager(consumer, producer, options);
+let manager = () => new Manager();
 export default manager;

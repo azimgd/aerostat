@@ -1,13 +1,17 @@
-let init = require('../init');
-let Request = require('./request');
-let Utils = require('./utils')();
+import init from '../init';
+import Request from './request';
+import Utils from './utils';
 
 class Consumer {
-  constructor(options = {}) {
-    this.repeating = options.repeating || false;
-    this.request = Request({ root_url: options.root_url });
+  constructor(config) {
+    this.request = new Request(config);
+    this.utils = Utils();
+    this.config = config;
   }
 
+  /**
+   *
+   */
   process(url, method, data, doneCallback) {
     return this.request.send(url, method, data).then((res) => {
       doneCallback();
@@ -20,10 +24,13 @@ class Consumer {
     });
   }
 
+  /**
+   *
+   */
   consume(name, producer, success, failure) {
     let consumer = (job, done) => {
       //decoding data into required format
-      job.data = Utils.decode(job.data);
+      job.data = this.utils.decode(job.data);
 
       //sending payload to provided api url
       return this.process(job.data.url, job.data.method, job.data.payload, done)
@@ -44,7 +51,7 @@ class Consumer {
       })
       .then(() => {
         //Queueing next job, to make repeating loop of delayed tasks
-        if(this.repeating && producer) {
+        if(this.config.isRepeating && producer) {
           producer();
         }
       });
@@ -54,5 +61,4 @@ class Consumer {
   }
 }
 
-let consumer = (options) => new Consumer(options);
-export default consumer;
+export default Consumer;

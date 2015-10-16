@@ -1,10 +1,9 @@
-let manager = require('../index')({
-  root_url: 'http://www.mocky.io/v2',
-  repeating: true,
-  delay: 5000
-});
+import Aerostat from '../index';
+let aerostat = Aerostat();
 
-manager.init('will-pass', {
+aerostat.setConfig({ isRepeating: true, delay: 3400 });
+
+aerostat.init('will-pass', {
   url: '/55febabac604810e14c098fa',
   method: 'post',
   payload: {
@@ -18,7 +17,7 @@ manager.init('will-pass', {
   console.log(res.err, res.payload);
 });
 
-manager.init('will-fail', {
+aerostat.init('will-fail', {
   url: '/undefined-url',
   method: 'post',
   payload: {

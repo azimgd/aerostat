@@ -1,11 +1,16 @@
-var axios = require('axios');
+import axios from 'axios';
+import config from './stores/config';
 
 class Request {
-  constructor(options) {
-    this.root_url = options.root_url || false;
+  constructor(config) {
+    this.config = config;
   }
 
+  /**
+   * 
+   */
   send(url, method, data) {
+    url = (this.config.rootUrl || '') + url;
     let params = {
       method: method,
       url: url,
@@ -16,4 +21,4 @@ class Request {
   }
 }
 
-export default (options) => new Request(options);
+export default Request;
