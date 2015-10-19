@@ -2,7 +2,6 @@ import Consumer from './consumer';
 import Producer from './producer';
 import init from '../init';
 import Q from 'q';
-import _ from 'lodash';
 import Config from './stores/config';
 import Utils from './utils';
 
