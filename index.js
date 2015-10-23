@@ -1,1 +1,1 @@
-module.exports = require('./src/manager');
+module.exports = require('./lib/export');
