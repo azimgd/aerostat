@@ -1,32 +1,26 @@
 import Aerostat from '../index';
-let aerostat = Aerostat();
 
-aerostat.setConfig({ isRepeating: true, delay: 3400, priority: 'high' });
+//Bootup, start web interface
+Aerostat.init().start();
 
-aerostat.init('will-pass', {
-  url: '/55febabac604810e14c098fa',
+//Specify configs
+Aerostat.config.baseUrl = 'http://www.mocky.io/v2';
+Aerostat.config.delay = 1000;
+
+//initialize producer
+const data = {
+  url: '/5185415ba171ea3a00704eed',
   method: 'post',
   payload: {
-    name: 'name',
-    surname: 'surname',
-    msg: 'message'
+    msg: 'message',
+    new: 'another'
   }
-}, (res) => {
-  console.log(res.response, res.payload);
-}, (res) => {
-  console.log(res.err, res.payload);
-});
+};
+Aerostat.producer('message-name', data).create();
 
-aerostat.init('will-fail', {
-  url: '/undefined-url',
-  method: 'post',
-  payload: {
-    name: 'name',
-    surname: 'surname',
-    msg: 'message'
-  }
-}, (res) => {
-  console.log(res.response, res.payload);
-}, (res) => {
-  console.log(res.err, res.payload);
-});
+//initialize consumer
+let jobConsumer = Aerostat.consumer('message-name');
+jobConsumer.onValidate((res) => console.log(res.payload, 'validate'));
+jobConsumer.onSuccess((res) => console.log(res.response.response.data, 'success'));
+jobConsumer.onFail((res) => console.log(res.response.response.data, 'fail'));
+jobConsumer.consume(jobConsumer.callback);
