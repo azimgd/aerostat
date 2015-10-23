@@ -9,42 +9,76 @@ Aerostat is a Pub/Sub MQ integrated with message delivery service built for node
 `npm install aerostat`
 
 ## Options
+```
+Aerostat.config.baseUrl = 'http://www.mocky.io/v2';
+Aerostat.config.isRepeating = false;
+```
+
+## Options Api
 
 ```
-let options = {
-  /**
-   * New job will be added to queue after existing is executed,
-   * creating infinite loop of delayed repeating jobs
-   */
-  repeating: false,
+{
+  //Should new job be triggered after previos has finished
+  isRepeating: true,
 
-  /**
-   * Delay between repeating jobs in milliseconds
-   */
-  delay: 5000
-};
+  //Base url to send request with payload for all jobs
+  baseUrl: null,
+
+  //Remove job from queue after it's done
+  removeOnComplete: false,
+
+  //Delay between current and next job to be triggered
+  delay: 10000,
+
+  //Time to live for each job, will be removed after ttl is finished
+  ttl: 16000,
+
+  //Priority of job
+  priority: 'high',
+
+  //Removes delayed jobs on start
+  removeDelayedJobs: true,
+
+  //Removes active jobs on start
+  removeActiveJobs: true,
+
+  kue: {
+    //Port for Kue web interface, set to false to deactivate
+    port: 3000
+  }
+}
 ```
 
 ## Example
 
-This code exampe will publish a subscription, and consumer will deliver payload message each 2 minutes to provided url.
+This code exampe will create a producer subscription, and consumer will deliver payload message each 2 minutes to provided url.
 ```
-let aerostat = require('aerostat');
-let options = {};
+import Aerostat from '../index';
 
-aerostat(options).init('jobname', {
-  url: 'http://example.com/v2/analytics/update',
+//Bootup, start web interface
+Aerostat.init().start();
+
+//Specify configs
+Aerostat.config.baseUrl = 'http://www.mocky.io/v2';
+Aerostat.config.delay = 2 * 60000;
+
+//initialize producer
+const data = {
+  url: '/5185415ba171ea3a00704eed',
   method: 'post',
   payload: {
-    user: 'username',
-    timestamp: '1182882221',
-    msg: 'message'
+    msg: 'message',
+    new: 'another'
   }
-}, (res) => {
-  console.log(res.response, res.payload);
-}, (res) => {
-  console.log(res.err, res.payload);
-});
+};
+Aerostat.producer('message-name', data).create();
+
+//initialize consumer
+let jobConsumer = Aerostat.consumer('message-name');
+jobConsumer.onValidate((res) => console.log(res.payload, 'validate'));
+jobConsumer.onSuccess((res) => console.log(res.response.response.data, 'success'));
+jobConsumer.onFail((res) => console.log(res.response.response.data, 'fail'));
+jobConsumer.consume(jobConsumer.callback);
 ```
 
 ## License
