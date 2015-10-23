@@ -13,8 +13,8 @@ const data = {
   method: 'post',
   payload: {
     msg: 'message',
-    new: 'another'
-  }
+    new: 'another',
+  },
 };
 Aerostat.producer('message-name', data).create();
 
