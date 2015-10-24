@@ -1,9 +1,4 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-var config = {
+let config = {
   //Should new job be triggered after previos has finished
   isRepeating: true,
 
@@ -30,9 +25,8 @@ var config = {
 
   kue: {
     //Port for Kue web interface, set to false to deactivate
-    port: 3000
-  }
+    port: 3000,
+  },
 };
 
-exports['default'] = config;
-module.exports = exports['default'];
+export default config;

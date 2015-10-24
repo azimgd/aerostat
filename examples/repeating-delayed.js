@@ -1,4 +1,4 @@
-import Aerostat from '../index';
+var Aerostat = require('../index');
 
 //Bootup, start web interface
 Aerostat.init().start();
@@ -8,7 +8,7 @@ Aerostat.config.baseUrl = 'http://www.mocky.io/v2';
 Aerostat.config.delay = 1000;
 
 //initialize producer
-const data = {
+var data = {
   url: '/5185415ba171ea3a00704eed',
   method: 'post',
   payload: {
@@ -19,8 +19,17 @@ const data = {
 Aerostat.producer('message-name', data).create();
 
 //initialize consumer
-let jobConsumer = Aerostat.consumer('message-name');
-jobConsumer.onValidate((res) => console.log(res.payload, 'validate'));
-jobConsumer.onSuccess((res) => console.log(res.response.response.data, 'success'));
-jobConsumer.onFail((res) => console.log(res.response.response.data, 'fail'));
+var jobConsumer = Aerostat.consumer('message-name');
+jobConsumer.onValidate(function(res) {
+  console.log(res.payload, 'validate');
+});
+
+jobConsumer.onSuccess(function(res) {
+  console.log(res.response.response.data, 'success');
+});
+
+jobConsumer.onFail(function(res) {
+  console.log(res.response.response.data, 'fail');
+});
+
 jobConsumer.consume(jobConsumer.callback);
