@@ -4,17 +4,70 @@ Aerostat is a Pub/Sub MQ integrated with message delivery service built for node
 
 ![Aerostat architecture](http://i.imgur.com/1RRgHzV.png)
 
-## Installation
+## Quickstart
+Aerostat requires Redis >= 2.6.12
 
+### Install
 `npm install aerostat`
 
-## Options
+### Example
+This code snippet will create a subscription with producer, and consumer will deliver payload message each 2 minutes to specified endpoint.
+
 ```
+var Aerostat = require('aerostat');
+
+//Bootup, start web interface
+Aerostat.init().start();
+
+//Specify configs
 Aerostat.config.baseUrl = 'http://www.mocky.io/v2';
-Aerostat.config.isRepeating = false;
+Aerostat.config.delay = 2 * 60000;
+
+//initialize producer
+var data = {
+  url: '/5185415ba171ea3a00704eed',
+  payload: {
+    msg: 'message',
+    new: 'another'
+  }
+};
+Aerostat.producer('message-name', data).create();
+
+//initialize consumer
+var jobConsumer = Aerostat.consumer('message-name');
+jobConsumer.onSuccess(function() { console.log(res.response.response.data, 'success') });
+jobConsumer.consume(jobConsumer.callback);
 ```
 
-## Options Api
+## Api
+
+#### Aerostat
+Create new instance
+
+#### .config
+JSON with configuration
+
+#### .init()
+Entery point for queue, applies configs activates web ui
+
+  * .start() - Bootup, start web interface
+  * .queue() - Returs kue instance
+
+#### .producer(name, payload)
+MQ producer
+
+  * .create() - Initializes and saves job into queue with specified name and payload data
+
+#### .consumer(name)
+MQ consumer
+
+  * .consume(callback) - Executes callback when job with specified name popped from the queue
+  * .callback(job, done) - Will send payload received from message to specified endpoint, parse resonse using .onValidate, then call .onSuccess or .onFail respectively
+  * .onSuccess() - Function to trigger on successful request
+  * .onFail() - Function to trigger on failed request
+  * .onValidate() - Parse received response
+
+## Config api
 
 ```
 {
@@ -47,38 +100,6 @@ Aerostat.config.isRepeating = false;
     port: 3000
   }
 }
-```
-
-## Example
-
-This code exampe will create a producer subscription, and consumer will deliver payload message each 2 minutes to provided url.
-```
-import Aerostat from '../index';
-
-//Bootup, start web interface
-Aerostat.init().start();
-
-//Specify configs
-Aerostat.config.baseUrl = 'http://www.mocky.io/v2';
-Aerostat.config.delay = 2 * 60000;
-
-//initialize producer
-const data = {
-  url: '/5185415ba171ea3a00704eed',
-  method: 'post',
-  payload: {
-    msg: 'message',
-    new: 'another'
-  }
-};
-Aerostat.producer('message-name', data).create();
-
-//initialize consumer
-let jobConsumer = Aerostat.consumer('message-name');
-jobConsumer.onValidate((res) => console.log(res.payload, 'validate'));
-jobConsumer.onSuccess((res) => console.log(res.response.response.data, 'success'));
-jobConsumer.onFail((res) => console.log(res.response.response.data, 'fail'));
-jobConsumer.consume(jobConsumer.callback);
 ```
 
 ## License
