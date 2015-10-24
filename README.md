@@ -50,22 +50,22 @@ JSON with configuration
 #### .init()
 Entery point for queue, applies configs activates web ui
 
-  * .start() - Bootup, start web interface
-  * .queue() - Returs kue instance
+  * **.start()** - Bootup, start web interface
+  * **.queue()** - Returs kue instance
 
 #### .producer(name, payload)
 MQ producer
 
-  * .create() - Initializes and saves job into queue with specified name and payload data
+  * **.create()** - Initializes and saves job into queue with specified name and payload data
 
 #### .consumer(name)
 MQ consumer
 
-  * .consume(callback) - Executes callback when job with specified name popped from the queue
-  * .callback(job, done) - Will send payload received from message to specified endpoint, parse resonse using .onValidate, then call .onSuccess or .onFail respectively
-  * .onSuccess() - Function to trigger on successful request
-  * .onFail() - Function to trigger on failed request
-  * .onValidate() - Parse received response
+  * **.consume(callback)** - Executes callback when job with specified name popped from the queue
+  * **.callback(job, done)** - Will send payload received from message to specified endpoint, parse resonse using .onValidate, then call .onSuccess or .onFail respectively
+  * **.onSuccess()** - Function to trigger on successful request
+  * **.onFail()** - Function to trigger on failed request
+  * **.onValidate()** - Parse received response
 
 ## Config api
 
