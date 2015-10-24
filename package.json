@@ -28,12 +28,10 @@
   "homepage": "https://github.com/azimgd/aerostat#readme",
   "dependencies": {
     "axios": "^0.5.4",
+    "core-js": "^1.2.3",
     "flat": "^1.6.0",
     "kue": "^0.9.6",
     "lodash": "^3.10.1",
     "q": "^1.4.1"
-  },
-  "devDependencies": {
-    "babel-core": "^5.8.25"
   }
 }
