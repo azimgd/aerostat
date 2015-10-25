@@ -11,7 +11,7 @@ Aerostat requires Redis >= 2.6.12
 `npm install aerostat`
 
 ### Example
-This code snippet will create a subscription with producer, and consumer will deliver payload message each 2 minutes to specified endpoint.
+This code snippet will create a subscription with producer, and consumer will deliver payload message each 2 minutes to specified endpoint. You can find more detailed version of this example in /examples/repeating-delayed.js
 
 ```
 var Aerostat = require('aerostat');
@@ -35,7 +35,8 @@ Aerostat.producer('message-name', data).create();
 
 //initialize consumer
 var jobConsumer = Aerostat.consumer('message-name');
-jobConsumer.onSuccess(function() { console.log(res.response.response.data, 'success') });
+jobConsumer.onSuccess(function(res) { console.log(res.response.response.data, 'success'); });
+jobConsumer.onFail(function(res) { console.log(res.response.response.data, 'failed'); });
 jobConsumer.consume(jobConsumer.callback);
 ```
 
