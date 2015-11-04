@@ -11,8 +11,11 @@ Aerostat requires Redis >= 2.6.12
 `npm install aerostat`
 
 ### Example
+Check out following examples to get more detailed overview:
+* [Average bitcoin price calculator](https://github.com/azimgd/aerostat/blob/master/examples/btc-avgprice.js)
+* [Infinite message delivery loop](https://github.com/azimgd/aerostat/blob/master/examples/repeating-delayed.js)
 
-This code snippet will create a subscription with producer, and consumer will deliver payload message each 2 minutes to specified endpoint. You can find more detailed version of this example [here](https://github.com/azimgd/aerostat/blob/master/examples/repeating-delayed.js)
+This code snippet will create a subscription with producer, and consumer will deliver payload message each 2 minutes to specified endpoint.
 ```
 var Aerostat = require('aerostat');
 
