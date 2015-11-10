@@ -26,6 +26,7 @@ Aerostat.config.delay = 2 * 60000;
 //initialize producer
 var data = {
   url: '/5185415ba171ea3a00704eed',
+  params: {},
   payload: {
     msg: 'message',
     new: 'another'

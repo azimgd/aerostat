@@ -13,8 +13,11 @@ Aerostat.config.delay = 2000;
 
 //initialize producer
 Aerostat.producer('btc.getPrice', {
-  url: '/prices/spot?currency=USD',
-  method: 'get'
+  url: '/prices/spot',
+  method: 'get',
+  params: {
+    currency: 'usd'
+  }
 }).create();
 
 //initialize consumer
