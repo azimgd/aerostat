@@ -17,7 +17,8 @@ const Request = (state) => ({
       url: url,
       method: state.request.method,
       data: state.request.payload,
-      params: state.request.params
+      params: state.request.params,
+      headers: state.request.headers
     });
   },
 

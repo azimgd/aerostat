@@ -30,6 +30,7 @@ Aerostat.config.delay = 2 * 60000;
 var data = {
   url: '/5185415ba171ea3a00704eed',
   params: {},
+  headers: {},
   payload: {
     msg: 'message',
     new: 'another'
