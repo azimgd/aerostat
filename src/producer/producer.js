@@ -6,23 +6,27 @@ const Creator = (state) => ({
   /**
    * Creates and saves a new job into kue
    */
-  create: () => {
+  create: (priorityConfig) => {
     let job = init().queue().create(state.name, state.data);
 
-    if (config.removeOnComplete) {
-      job = job.removeOnComplete(config.removeOnComplete);
+    if (priorityConfig.removeOnComplete || config.removeOnComplete) {
+      const removeOnComplete = priorityConfig.removeOnComplete || config.removeOnComplete;
+      job = job.removeOnComplete(removeOnComplete);
     }
 
-    if (config.delay) {
-      job = job.delay(config.delay);
+    if (priorityConfig.delay || config.delay) {
+      const delay = priorityConfig.delay || config.delay;
+      job = job.delay(delay);
     }
 
-    if (config.ttl) {
-      job = job.ttl(config.ttl);
+    if (priorityConfig.ttl || config.ttl) {
+      const ttl = priorityConfig.ttl || config.ttl;
+      job = job.ttl(ttl);
     }
 
-    if (config.priority) {
-      job = job.priority(config.priority);
+    if (priorityConfig.priority || config.priority) {
+      const priority = priorityConfig.priority || config.priority;
+      job = job.priority(priority);
     }
 
     job.save();

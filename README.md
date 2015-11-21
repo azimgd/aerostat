@@ -62,7 +62,7 @@ Entery point for queue, applies configs activates web ui
 #### .producer(name, payload)
 MQ producer
 
-  * **.create()** - Initializes and saves job into queue with specified name and payload data
+  * **.create(priorityConfig)** - Initializes and saves job into queue with specified name and payload data
 
 #### .consumer(name)
 MQ consumer
